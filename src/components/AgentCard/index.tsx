@@ -2,7 +2,7 @@ import { Container, Header, Card, CardImg, CardInfos, AgentPicture, AgentName, A
 import { useState, useEffect } from 'react';
 
 
-const API_KEY = `https://valorant-api.com/v1/agents`;
+export const API_KEY = `https://valorant-api.com/v1/agents`;
 
 export const AgentCard = () => {
 
