@@ -1,12 +1,18 @@
 import {  useReducer } from "react";
 
+type abilitiesTypeSlot = {
+        abilityName: string, 
+        abilityDescription: string, 
+        abilityIcon: string  
+}
+
 type reducerState = {
     name: string,
     role: string,
     roleIcon: string,
     description: string,
     img: string,
-    abilities: string[]
+    abilities: abilitiesTypeSlot[]
 }
 
 type reducerActionType = {
@@ -23,10 +29,11 @@ export const agentInitialState: reducerState = {
     description: "Turkish bounty hunter Fade unleashes the power of raw nightmare to seize enemy secrets. Attuned with terror itself, she hunts down targets and reveals their deepest fears - before crushing them in the dark.",
     img: '',
     abilities: [
-        "skill_1", 
-        "skill_2", 
-        "skill_3", 
-        "skill_4"
+        {
+            abilityName: 'Olho',
+            abilityDescription: 'Olho',
+            abilityIcon: 'olho'
+        }
     ]
 
 }
@@ -37,15 +44,38 @@ export const agentInfosReducer = (state: reducerState, action: reducerActionType
            return  {
                ...state, 
                name: action.payload.name,
-               role: action.payload.role.role,
-               roleIcon: action.payload.role.roleIcon,
+               role: action.payload.role,
+               roleIcon: action.payload.roleIcon,
                description: action.payload.description,
                img: action.payload.img,
                abilities: [ 
-                    action.payload.abilities.skill_1, 
-                    action.payload.abilities.displayName, 
-                    action.payload.abilities.displayName, 
-                    action.payload.abilities.displayName, 
+                    {
+                        abilityName: action.payload.role.displayName,
+                        abilityDescription: action.payload.role.description,
+                        abilityIcon: action.payload.role.displayIcon,
+                        abilityInfo: action.payload.abilityInfo
+                    },
+                   {
+                    abilityName: action.payload.role.displayName,
+                    abilityDescription: action.payload.role.description,
+                    abilityIcon: action.payload.role.displayIcon
+                   },
+                   {
+                    abilityName: action.payload.role.displayName,
+                    abilityDescription: action.payload.role.description,
+                    abilityIcon: action.payload.role.displayIcon
+                    },
+                    {
+                        abilityName: action.payload.role.displayName,
+                        abilityDescription: action.payload.role.description,
+                        abilityIcon: action.payload.role.displayIcon
+                    },
+                    {
+                        abilityName: action.payload.role.displayName,
+                        abilityDescription: action.payload.role.description,
+                        abilityIcon: action.payload.role.displayIcon
+                    },
+
                 ]
            }
            

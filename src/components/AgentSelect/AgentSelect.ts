@@ -34,7 +34,7 @@ export const AgentSelectArea = styled.div`
     display: flex;
     flex-wrap: wrap;
     align-items: flex-end;
-    justify-content: center;
+
     padding: 16px;
 
 `
@@ -62,12 +62,17 @@ export const SelectedAgentInfos = styled.div`
 `
 export const Skills = styled.div`
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
     background-color: rgba(100, 100, 100, 0.1);
-
 `
+
+export const SkillsBox = styled.div`
+    display: flex;
+    flex-direction: column;
+    
+`
+
 export const SkillsButtonsKey = styled.div`
     .btn-key{
         max-width: 50px;
@@ -94,6 +99,10 @@ export const SkillsButtonsIcon = styled.div`
         background-color: rgba(255, 255, 255, 0.4);
         padding: 5px;
         border: 2px solid black;
+        img {
+            width: 100%;
+            height: 100%;
+        }
     }
 `
 

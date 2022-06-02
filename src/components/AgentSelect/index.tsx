@@ -1,5 +1,5 @@
 import { Container, AgentProfile, AgentSelectArea,MidAgentSection,LockInButton, AgentIcon, CompTeam, SelectedAgentInfos,
-        Skills, SkillsButtonsKey, SkillsButtonsIcon, SkillDescription}  from './AgentSelect';
+        Skills, SkillsButtonsKey, SkillsButtonsIcon, SkillDescription, SkillsBox}  from './AgentSelect';
 import { useState, useEffect, useReducer } from 'react';
 import { API_KEY } from '../AgentCard';
 
@@ -21,13 +21,14 @@ export const AgentSelect = () => {
 
     useEffect(()=>{
         getAgents();
+
     }, []);
 
 
-
     function handleSelectedAgent(id: string){
-        agents.filter((item: any)=> {
-            if(item.uuid === id){
+        agents.filter((playable: { isPlayableCharacter: any }) => playable.isPlayableCharacter)
+        .filter((item: any)=> {
+            if(item.uuid === id && item){      
 
                 dispatch({
                     type: 'SET_AGENT_INFOS',
@@ -38,16 +39,39 @@ export const AgentSelect = () => {
                         description: item.description,
                         img: item.fullPortrait,
                         abilities: [
-                                item.abilities[0].displayName,
-                                item.abilities[1].displayName,
-                                item.abilities[2].displayName,
-                                item.abilities[3].displayName,
+                             {
+                                abilityName: item.role.displayName,
+                                abilityIcon: item.role.displayIcon,
+                                abilityDescription: item.role.description,
+                              },
+                              {
+                                abilityName: item.abilities[0].displayName,
+                                abilityIcon: item.abilities[0].displayIcon,
+                                abilityDescription: item.abilities[0].description,
+                              },
+                              {
+                                abilityName: item.abilities[1].displayName,
+                                abilityIcon: item.abilities[1].displayIcon,
+                                abilityDescription: item.abilities[1].description,
+                              },
+                              {
+                                abilityName: item.abilities[2].displayName,
+                                abilityIcon: item.abilities[2].displayIcon,
+                                abilityDescription: item.abilities[2].description,
+                              },
+                              {
+                                abilityName: item.abilities[3].displayName,
+                                abilityIcon: item.abilities[3].displayIcon,
+                                abilityDescription: item.abilities[3].description,
+                              },
                      ]
                     }
                 })
+             
             }
         })
     }
+
 
     return(
         <Container>
@@ -57,7 +81,8 @@ export const AgentSelect = () => {
                 <AgentProfile src={state.img}/>
                 <LockInButton>Lock</LockInButton>
                 <AgentSelectArea>
-                    {agents.map((agent: any) => (
+                    {agents.filter((playable: { isPlayableCharacter: any }) => playable.isPlayableCharacter)
+                    .map((agent: any) => (
                         <AgentIcon onClick={()=>handleSelectedAgent(agent.uuid)} key={agent.uuid} src={agent.displayIcon} alt={agent.displayName}/> 
                     ))}
                 </AgentSelectArea>
@@ -70,20 +95,31 @@ export const AgentSelect = () => {
             <h1>{state.name} </h1>
             
             <Skills> 
-                <SkillsButtonsKey> 
-                    <div className='btn-key'>Infos</div>
-                    <div className='btn-key'>C</div>
-                    <div className='btn-key' >Q</div>
-                    <div className='btn-key'>E</div>
-                    <div className='btn-key'>X</div>
-                </SkillsButtonsKey>
+                {state.abilities.map((ability: any) => (
+                    <SkillsBox key={ability.abilityName}>
+                         <div className='btn-key'>Infos</div>  
+                         <div className='btn-icon'> <img src={state.roleIcon} /> </div>
+                    </SkillsBox>
+                ))}
+
+              
                 <SkillsButtonsIcon>
-                    <div className='btn-icon'>{state.roleIcon}</div>
-                    <div className='btn-icon'>{state.abilities[1]}</div>
-                    <div className='btn-icon'>{state.abilities[2]}</div>
-                    <div className='btn-icon'>{state.abilities[3]}</div>
-                    <div className='btn-icon'>{state.abilities[4]}</div>
+                    
+                    <div className='btn-icon'> <img src={state.roleIcon} alt="" /></div>
+                    {state.abilities.map((ability)=> (
+                        <div className='btn-icon' key={ability.abilityName}><img src={ability.abilityIcon} alt=""/></div>
+                    ))}
+                   
                 </SkillsButtonsIcon>
+                <SkillsBox>
+                    
+                    <div className="skill-box">
+                        {state.abilities.map((ability)=> (
+                            <div key={ability.abilityName}>{ability.abilityName}</div>
+                        ))}
+
+                    </div>
+                </SkillsBox>
             </Skills>
             <SkillDescription> 
                 <p>{state.description}</p>
