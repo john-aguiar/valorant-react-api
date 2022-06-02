@@ -3,7 +3,8 @@ import {  useReducer } from "react";
 type abilitiesTypeSlot = {
         abilityName: string, 
         abilityDescription: string, 
-        abilityIcon: string  
+        abilityIcon: string ,
+        abilitySlot: string
 }
 
 type reducerState = {
@@ -32,7 +33,8 @@ export const agentInitialState: reducerState = {
         {
             abilityName: 'Olho',
             abilityDescription: 'Olho',
-            abilityIcon: 'olho'
+            abilityIcon: 'olho',
+            abilitySlot: "slot 1"
         }
     ]
 
@@ -50,32 +52,35 @@ export const agentInfosReducer = (state: reducerState, action: reducerActionType
                img: action.payload.img,
                abilities: [ 
                     {
-                        abilityName: action.payload.role.displayName,
-                        abilityDescription: action.payload.role.description,
-                        abilityIcon: action.payload.role.displayIcon,
-                        abilityInfo: action.payload.abilityInfo
-                    },
-                   {
-                    abilityName: action.payload.role.displayName,
-                    abilityDescription: action.payload.role.description,
-                    abilityIcon: action.payload.role.displayIcon
-                   },
-                   {
-                    abilityName: action.payload.role.displayName,
-                    abilityDescription: action.payload.role.description,
-                    abilityIcon: action.payload.role.displayIcon
+                        abilityName: action.payload.abilityName,
+                        abilityDescription: action.payload.abilityDescription,
+                        abilityIcon: action.payload.abilityIcon,
+                        abilitySlot: action.payload.abilitySlot
                     },
                     {
-                        abilityName: action.payload.role.displayName,
-                        abilityDescription: action.payload.role.description,
-                        abilityIcon: action.payload.role.displayIcon
+                        abilityName: action.payload.abilityName,
+                        abilityDescription: action.payload.abilityDescription,
+                        abilityIcon: action.payload.abilityIcon,
+                        abilitySlot: action.payload.abilitySlot
                     },
                     {
-                        abilityName: action.payload.role.displayName,
-                        abilityDescription: action.payload.role.description,
-                        abilityIcon: action.payload.role.displayIcon
+                        abilityName: action.payload.abilityName,
+                        abilityDescription: action.payload.abilityDescription,
+                        abilityIcon: action.payload.abilityIcon,
+                        abilitySlot: action.payload.abilitySlot
                     },
-
+                    {
+                        abilityName: action.payload.abilityName,
+                        abilityDescription: action.payload.abilityDescription,
+                        abilityIcon: action.payload.abilityIcon,
+                        abilitySlot: action.payload.abilitySlot
+                    },
+                    {
+                        abilityName: action.payload.abilityName,
+                        abilityDescription: action.payload.abilityDescription,
+                        abilityIcon: action.payload.abilityIcon,
+                        abilitySlot: action.payload.abilitySlot
+                    },
                 ]
            }
            

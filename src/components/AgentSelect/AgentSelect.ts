@@ -70,26 +70,6 @@ export const Skills = styled.div`
 export const SkillsBox = styled.div`
     display: flex;
     flex-direction: column;
-    
-`
-
-export const SkillsButtonsKey = styled.div`
-    .btn-key{
-        max-width: 50px;
-        min-width: 30px;
-        height: 20px;
-        text-align: center;
-        margin-right: 5px;
-        background-color: rgba(255, 255, 255, 0.4);
-        padding: 5px;
-        border: 2px solid black;
-    }
-    display: flex;
-
-`
-export const SkillsButtonsIcon = styled.div`
-    display: flex;
-    margin-top: 5px;
     .btn-icon{
         max-width: 50px;
         min-width: 30px;
@@ -103,11 +83,21 @@ export const SkillsButtonsIcon = styled.div`
             width: 100%;
             height: 100%;
         }
+    .btn-key{
+        max-width: 50px;
+        min-width: 30px;
+        height: 30px;
+        text-align: center;
+        margin-right: 5px;
+        background-color: rgba(255, 255, 255, 0.4);
+        padding: 5px;
+        border: 2px solid black;
+        img {
+            width: 100%;
+            height: 100%;
+        }
+        }
     }
-`
-
-export const SkillsButtons = styled.div`
-
 `
 
 export const SkillDescription = styled.div`
