@@ -46,6 +46,30 @@ export const AgentSelect = () => {
                                 abilityDescription: item.role.description,
                                 abilitySlot: "Info"
                               },
+                              {
+                                abilityName: item.abilities[0].displayName,
+                                abilityIcon: item.abilities[0].displayIcon,
+                                abilityDescription: item.abilities[0].description,
+                                abilitySlot: "C"
+                              },
+                              {
+                                abilityName: item.abilities[1].displayName,
+                                abilityIcon: item.abilities[1].displayIcon,
+                                abilityDescription: item.abilities[1].description,
+                                abilitySlot: "Q"
+                              },
+                              {
+                                abilityName: item.abilities[2].displayName,
+                                abilityIcon: item.abilities[2].displayIcon,
+                                abilityDescription: item.abilities[2].description,
+                                abilitySlot: "E"
+                              },
+                              {
+                                abilityName: item.abilities[3].displayName,
+                                abilityIcon: item.abilities[3].displayIcon,
+                                abilityDescription: item.abilities[3].description,
+                                abilitySlot: "X"
+                              },
 
                      ]
                     }
@@ -55,6 +79,9 @@ export const AgentSelect = () => {
         })
     }
 
+    function handleClickSkills(id: string){
+        /// Trabalhar com  o ID
+    }
 
     return(
         <Container>
@@ -77,18 +104,25 @@ export const AgentSelect = () => {
 
             <SelectedAgentInfos> 
             <h3>{state.role}</h3>
-            <h1>{state.name} </h1>
+            <h1>{state.name.toUpperCase()}</h1>
             
             <Skills> 
                 {state.abilities.map((ability: any, index) => (
                     <SkillsBox key={index}>
-                        <img src={ability.abilityIcon} alt={ability.abilityName}/>
-                        <div className="btn-key">{ability.abilityName}</div>
+                        <div className="btn-key">{ability.abilitySlot}</div>
+                        <div onClick={()=>handleClickSkills("")} className="btn-icon">
+                            <img src={ability.abilityIcon} alt={ability.abilityName}/>
+                        </div> 
                     </SkillsBox>
                 ))}
             </Skills>
 
             <SkillDescription> 
+                {state.abilities.filter((ability: any) => ability.abilitySlot === ability.abilitySlot).map((ability: any) => (
+                    <p key={ability.abilitySlot}>{ability.abilityDescription}</p>
+                ))}
+                
+                <h3>{state.role}</h3>
                 <p>{state.description}</p>
             </SkillDescription>
             

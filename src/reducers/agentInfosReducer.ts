@@ -52,34 +52,34 @@ export const agentInfosReducer = (state: reducerState, action: reducerActionType
                img: action.payload.img,
                abilities: [ 
                     {
-                        abilityName: action.payload.abilityName,
-                        abilityDescription: action.payload.abilityDescription,
-                        abilityIcon: action.payload.abilityIcon,
-                        abilitySlot: action.payload.abilitySlot
+                        abilityName: action.payload.abilities[0].abilityName,
+                        abilityDescription: action.payload.abilities[0].abilityDescription,
+                        abilityIcon: action.payload.abilities[0].abilityIcon,
+                        abilitySlot: action.payload.abilities[0].abilitySlot
                     },
                     {
-                        abilityName: action.payload.abilityName,
-                        abilityDescription: action.payload.abilityDescription,
-                        abilityIcon: action.payload.abilityIcon,
-                        abilitySlot: action.payload.abilitySlot
+                        abilityName: action.payload.abilities[1].abilityName,
+                        abilityDescription: action.payload.abilities[1].abilityDescription,
+                        abilityIcon: action.payload.abilities[1].abilityIcon,
+                        abilitySlot: action.payload.abilities[1].abilitySlot
                     },
                     {
-                        abilityName: action.payload.abilityName,
-                        abilityDescription: action.payload.abilityDescription,
-                        abilityIcon: action.payload.abilityIcon,
-                        abilitySlot: action.payload.abilitySlot
+                        abilityName: action.payload.abilities[2].abilityName,
+                        abilityDescription: action.payload.abilities[2].abilityDescription,
+                        abilityIcon: action.payload.abilities[2].abilityIcon,
+                        abilitySlot: action.payload.abilities[2].abilitySlot
                     },
                     {
-                        abilityName: action.payload.abilityName,
-                        abilityDescription: action.payload.abilityDescription,
-                        abilityIcon: action.payload.abilityIcon,
-                        abilitySlot: action.payload.abilitySlot
+                        abilityName: action.payload.abilities[3].abilityName,
+                        abilityDescription: action.payload.abilities[3].abilityDescription,
+                        abilityIcon: action.payload.abilities[3].abilityIcon,
+                        abilitySlot: action.payload.abilities[3].abilitySlot
                     },
                     {
-                        abilityName: action.payload.abilityName,
-                        abilityDescription: action.payload.abilityDescription,
-                        abilityIcon: action.payload.abilityIcon,
-                        abilitySlot: action.payload.abilitySlot
+                        abilityName: action.payload.abilities[4].abilityName,
+                        abilityDescription: action.payload.abilities[4].abilityDescription,
+                        abilityIcon: action.payload.abilities[4].abilityIcon,
+                        abilitySlot: action.payload.abilities[4].abilitySlot
                     },
                 ]
            }
