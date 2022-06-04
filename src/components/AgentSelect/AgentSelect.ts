@@ -2,6 +2,11 @@ import styled from "styled-components"
 import  breezeBg  from  "../../images/Valorant-Breeze.png"
 import bindBg from "../../images/bind-valorant.jpeg"
 
+
+type Props ={
+    isVisible: boolean;
+}
+
 export const Container = styled.div`
     display: flex;
     justify-content: center;
@@ -20,12 +25,16 @@ export const MidAgentSection = styled.div`
     align-items: center;
 `
 
-export const AgentProfile = styled.img`
+export const AgentProfile = styled.img<Props>`
+    visibility: ${props => props.isVisible ? "visible" : "hidden"};
     width: 500px;
     height: 500px;
     padding-bottom: 3em;
 `
-export const LockInButton = styled.button`
+
+
+export const LockInButton = styled.button<Props>`
+    visibility: ${props => props.isVisible ? "visible" : "hidden"};
     :disabled {
         background-color: rgba(10,154,142, 0.85);
     }
@@ -47,8 +56,7 @@ export const AgentSelectArea = styled.div`
     display: flex;
     flex-wrap: wrap;
     align-items: flex-end;
-
-    padding: 16px;
+    padding: 16px 0;
 
 `
 
@@ -61,16 +69,46 @@ export const AgentIcon = styled.img`
 
 export const CompTeam = styled.div`
     position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     left: 0;
     width: 200px;
     height: 400px;
-    background-color: aliceblue;
 `
+
+export const CompAgentSelected = styled.div`
+    display: flex;
+    position: relative;
+    background-color: red;
+    width: 180px;
+    .box-agent-img{
+        width: 25%;
+        height: 100%;
+        margin-bottom: 10px;
+    }
+
+    #agent-icon-comp {
+        width: 50px;
+        height: 50px;
+    }
+
+    #role-icon-comp-absolute {
+        width: 20px;
+        height: 20px;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+    }
+`
+
+
 
 export const SelectedAgentInfos = styled.div`
     position: absolute;
     right: 0;
-    width: 23%;
+    width: 22%;
 
     height: 100%;
     color: #fff;
@@ -152,5 +190,20 @@ export const SkillsBox = styled.div`
 `
 
 export const SkillDescription = styled.div`
-    padding: 16px;
+    padding-top: 1em;
+
+    p {
+        margin-top: 0.2em;
+    }
+
+    #skill-name {
+        font-weight: bold;
+        margin-bottom: 0;
+    }
+    #agent-description {
+        font-family: 'Open Sans', sans-serif;
+        font-size: 1em;
+        font-weight: bold;
+        color: #d8e89e;
+    }
 `

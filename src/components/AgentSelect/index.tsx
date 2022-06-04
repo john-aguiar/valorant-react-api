@@ -1,5 +1,5 @@
 import { Container, AgentProfile, AgentSelectArea,MidAgentSection,LockInButton, AgentIcon, CompTeam, SelectedAgentInfos,
-        Skills, SkillDescription, SkillsBox}  from './AgentSelect';
+        Skills, SkillDescription, SkillsBox, CompAgentSelected}  from './AgentSelect';
 import { useState, useEffect, useReducer } from 'react';
 import { API_KEY } from '../AgentCard';
 
@@ -11,7 +11,7 @@ export const AgentSelect = () => {
 
     const [agents, setAgents] = useState<any>([]);
     const [agentSelectedAbilityName, setAgentSelectedAbilityName] = useState<any>('');
-    const [isLocked, setIsLocked] = useState<boolean>(false);
+    const [isLocked, setIsLocked] = useState<boolean>(false);    
     const [isCharSelected, setIsCharSelected] = useState(false)
     const [abilityClicked, setAbilityClicked] = useState(0)
 
@@ -95,20 +95,31 @@ export const AgentSelect = () => {
     return(
         <Container>
 
-            <CompTeam />
+            <CompTeam> 
+
+                <CompAgentSelected> 
+                    <div className="box-agent-img">
+                     {isCharSelected && 
+                     <> 
+                        <img id='agent-icon-comp' src={agents[5].displayIcon} alt="" />
+                        <img id="role-icon-comp-absolute" src={state.roleIcon} alt="" />
+                     </>
+                    
+                     }   
+                    </div>
+                    <h2 className='agent-name'>{state.name}</h2>
+                </CompAgentSelected>
+
+            </CompTeam>
 
             <MidAgentSection> 
 
-                
-            {isCharSelected &&
-            <> 
-                <AgentProfile src={state.img}/>
+                <AgentProfile isVisible={isCharSelected} src={state.img}/>
 
-                <LockInButton disabled={isLocked} onClick={()=> {setIsLocked(true)}}>
+                <LockInButton isVisible={isCharSelected} disabled={isLocked} onClick={()=> {setIsLocked(true)}}>
                     {isLocked ? 'LOCKED' : 'LOCK IN'}
                 </LockInButton>
-            </>
-            }
+   
 
 
                 <AgentSelectArea>
@@ -144,7 +155,11 @@ export const AgentSelect = () => {
                 
                 {state.abilities.map((ability: any, index) => (
                 <SkillDescription key={index}> 
-                    <span>{ability.abilityName}</span> 
+                    {ability.abilitySlot === "Info" &&
+                        <p id='agent-description'>{state.description}</p>
+                    }
+
+                    <span id='skill-name'>{ability.abilityName.toUpperCase()}</span> 
                         <p>{ability.abilityDescription}</p>
                     </SkillDescription>
                 )).filter((item: any, index) => index === abilityClicked)
