@@ -26,7 +26,19 @@ export const AgentProfile = styled.img`
     padding-bottom: 3em;
 `
 export const LockInButton = styled.button`
+    :disabled {
+        background-color: rgba(10,154,142, 0.85);
+    }
 
+    width: 180px;
+    height: 50px;
+    background-color: rgba(134,202,191, 0.85);
+    padding: 10px;
+    color: white;
+    border: none;
+    border-radius: 1px;
+    font-size: 1.2em;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 `
 
 export const AgentSelectArea = styled.div`
@@ -58,7 +70,8 @@ export const CompTeam = styled.div`
 export const SelectedAgentInfos = styled.div`
     position: absolute;
     right: 0;
-    max-width: 27.5%;
+    width: 23%;
+
     height: 100%;
     color: #fff;
     background: rgba( 255, 255, 255, 0.1 );
@@ -90,9 +103,18 @@ export const Skills = styled.div`
 `
 
 export const SkillsBox = styled.div`
+        margin-right: 5px;
+    :hover {
+        background-color: rgba( 255, 255, 255, 0.3 );
+        transition: ease-in-out 0.05s;
+        .btn-key{
+        background-color: rgba(216,232,158, 0.75)
+    }
+    }
     display: flex;
     flex-direction: column;
     text-align: center;
+    justify-content: center;
     .btn-icon{
         display: flex;
         width: 50px;
@@ -100,7 +122,7 @@ export const SkillsBox = styled.div`
         justify-content: center;
         text-align: center;
         align-items: center;
-        margin-right: 5px;
+
         padding: 5px;
         img {
             width: 50px;
@@ -114,9 +136,8 @@ export const SkillsBox = styled.div`
         justify-content: center;
         text-align: center;
         align-items: center;
-        margin-right: 5px;
         margin-bottom: 5px;
-        background-color:#bfbfbf;
+        background-color: rgba(191,191,191, 0.25);
         padding: 5px;
         img {
             width: 100%;
@@ -124,10 +145,12 @@ export const SkillsBox = styled.div`
         }
     }
 
-    .btn-key:hover {
-        background-color: #d8e89e;
-    }
+
+
+
+    
 `
 
 export const SkillDescription = styled.div`
+    padding: 16px;
 `

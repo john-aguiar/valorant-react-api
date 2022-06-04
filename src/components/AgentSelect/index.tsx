@@ -10,6 +10,10 @@ export const AgentSelect = () => {
     const [state, dispatch] = useReducer(agentInfosReducer, agentInitialState);
 
     const [agents, setAgents] = useState<any>([]);
+    const [agentSelectedAbilityName, setAgentSelectedAbilityName] = useState<any>('');
+    const [isLocked, setIsLocked] = useState<boolean>(false);
+    const [isCharSelected, setIsCharSelected] = useState(false)
+    const [abilityClicked, setAbilityClicked] = useState(0)
 
     async function getAgents(){
         const response = await fetch(API_KEY);
@@ -21,7 +25,6 @@ export const AgentSelect = () => {
 
     useEffect(()=>{
         getAgents();
-
     }, []);
 
 
@@ -74,24 +77,39 @@ export const AgentSelect = () => {
                      ]
                     }
                 })
-                
+                setIsCharSelected(true)
+
             }
         })
     }
 
-    function handleClickSkills(id: string){
-        /// Trabalhar com  o ID
+    function saveIndexSkill(index: any){
+        setAbilityClicked(index);
+    }
+    console.log(abilityClicked)
+
+    function showAbilitiesInfos(){
+        
     }
 
     return(
         <Container>
+
             <CompTeam />
 
             <MidAgentSection> 
 
+                
+            {isCharSelected &&
+            <> 
                 <AgentProfile src={state.img}/>
 
-                <LockInButton>Lock</LockInButton>
+                <LockInButton disabled={isLocked} onClick={()=> {setIsLocked(true)}}>
+                    {isLocked ? 'LOCKED' : 'LOCK IN'}
+                </LockInButton>
+            </>
+            }
+
 
                 <AgentSelectArea>
                     {agents.filter((playable: { isPlayableCharacter: any }) => playable.isPlayableCharacter)
@@ -102,31 +120,41 @@ export const AgentSelect = () => {
                 
             </MidAgentSection>
 
-            <SelectedAgentInfos> 
-            <h3>{state.role}</h3>
-            <h1>{state.name.toUpperCase()}</h1>
-            
-            <Skills> 
-                {state.abilities.map((ability: any, index) => (
-                    <SkillsBox key={index}>
-                        <div className="btn-key">{ability.abilitySlot}</div>
-                        <div onClick={()=>handleClickSkills("")} className="btn-icon">
-                            <img src={ability.abilityIcon} alt={ability.abilityName}/>
-                        </div> 
-                    </SkillsBox>
-                ))}
-            </Skills>
 
-            <SkillDescription> 
-                {state.abilities.filter((ability: any) => ability.abilitySlot === ability.abilitySlot).map((ability: any) => (
-                    <p key={ability.abilitySlot}>{ability.abilityDescription}</p>
-                ))}
-                
+            {isCharSelected &&
+            <>
+            <SelectedAgentInfos> 
                 <h3>{state.role}</h3>
-                <p>{state.description}</p>
-            </SkillDescription>
+                <h1>{state.name.toUpperCase()}</h1>
+                
+                <Skills> 
+                <h2>{agentSelectedAbilityName}</h2>
+
+                    {state.abilities.map((ability: any, index) => (
+                        <SkillsBox  onClick={()=>saveIndexSkill(index)} key={index}>
+                            <div className="btn-key">{ability.abilitySlot}</div>
+                            <div className="btn-icon">
+                                <img src={ability.abilityIcon} alt={ability.abilityName}/>
+                            </div> 
+                        </SkillsBox>
+                    ))}
+                </Skills>
+
+
+                
+                {state.abilities.map((ability: any, index) => (
+                <SkillDescription key={index}> 
+                    <span>{ability.abilityName}</span> 
+                        <p>{ability.abilityDescription}</p>
+                    </SkillDescription>
+                )).filter((item: any, index) => index === abilityClicked)
+                }
+                
             
-        </SelectedAgentInfos>
+            </SelectedAgentInfos>
+            </>
+            }
+           
         
             
         </Container>
