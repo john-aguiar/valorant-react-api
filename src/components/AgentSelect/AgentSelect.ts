@@ -20,6 +20,7 @@ export const Container = styled.div`
 `
 
 export const MidAgentSection = styled.div`
+    width: 50%;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -44,6 +45,7 @@ export const LockInButton = styled.button<Props>`
     height: 50px;
     background-color: rgba(134,202,191, 0.85);
     padding: 10px;
+    margin-bottom: 10px;
     color: white;
     border: none;
     border-radius: 1px;
@@ -57,7 +59,6 @@ export const AgentSelectArea = styled.div`
     display: flex;
     flex-wrap: wrap;
     align-items: flex-end;
-    padding: 16px 0;
 
 `
 
@@ -69,6 +70,7 @@ export const AgentIcon = styled.img<Props>`
 `
 
 export const CompTeam = styled.div`
+    width: 25%;
     position: absolute;
     display: flex;
     flex-direction: column;
@@ -131,7 +133,7 @@ export const CompAgentSelected = styled.div`
 export const SelectedAgentInfos = styled.div`
     position: absolute;
     right: 0;
-    width: 22%;
+    width: 24%;
 
     height: 80%;
     color: #fff;

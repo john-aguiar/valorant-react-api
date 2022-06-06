@@ -145,14 +145,11 @@ export const AgentSelect = () => {
                 </AgentSelectArea>
                 
             </MidAgentSection>
-
-
             {isCharSelected &&
             <>
             <SelectedAgentInfos> 
                 <h3>{state.role}</h3>
                 <h1>{state.name.toUpperCase()}</h1>
-                
                 <Skills> 
                 <h2>{agentSelectedAbilityName}</h2>
 
@@ -165,9 +162,7 @@ export const AgentSelect = () => {
                         </SkillsBox>
                     ))}
                 </Skills>
-
-
-                
+                      
                 {state.abilities.map((ability: any, index) => (
                 <SkillDescription key={index}> 
                     {ability.abilitySlot === "Info" &&
