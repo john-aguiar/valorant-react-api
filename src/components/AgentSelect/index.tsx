@@ -10,7 +10,7 @@ import { agentInfosReducer, agentInitialState } from '../../reducers/agentInfosR
 type compSelectedType = {
     name: string,
     roleIcon: string,
-    agentIcon: string
+    displayIcon: string
 }
 
 export const AgentSelect = () => {
@@ -22,7 +22,7 @@ export const AgentSelect = () => {
     const [isLocked, setIsLocked] = useState<boolean>(false);    
     const [isCharSelected, setIsCharSelected] = useState(false)
     const [abilityClicked, setAbilityClicked] = useState(0)
-    const [compSelected, setCompSelected] = useState<compSelectedType[]>([])
+    const [compSelected, setCompSelected] = useState<compSelectedType[]>([    ])
     const [indexAgent, setIndexAgent] = useState(0)
 
     async function getAgents(){
@@ -41,56 +41,57 @@ export const AgentSelect = () => {
     function handleSelectedAgent(id: string){
         agents.filter((playable: { isPlayableCharacter: any }) => playable.isPlayableCharacter)
         .filter((item: any)=> {
-            if(item.uuid === id && item){     
-                setIndexAgent(agents.indexOf(item))
-
-                dispatch({
-                    type: 'SET_AGENT_INFOS',
-                    payload: {
-                        name: item.displayName,
-                        role: item.role.displayName,
-                        roleIcon: item.role.displayIcon,
-                        description: item.description,
-                        img: item.fullPortrait,
-                        abilities: [
-
-                             {
-                                abilityName: item.role.displayName,
-                                abilityIcon: item.role.displayIcon,
-                                abilityDescription: item.role.description,
-                                abilitySlot: "Info"
-                              },
-                              {
-                                abilityName: item.abilities[0].displayName,
-                                abilityIcon: item.abilities[0].displayIcon,
-                                abilityDescription: item.abilities[0].description,
-                                abilitySlot: "C"
-                              },
-                              {
-                                abilityName: item.abilities[1].displayName,
-                                abilityIcon: item.abilities[1].displayIcon,
-                                abilityDescription: item.abilities[1].description,
-                                abilitySlot: "Q"
-                              },
-                              {
-                                abilityName: item.abilities[2].displayName,
-                                abilityIcon: item.abilities[2].displayIcon,
-                                abilityDescription: item.abilities[2].description,
-                                abilitySlot: "E"
-                              },
-                              {
-                                abilityName: item.abilities[3].displayName,
-                                abilityIcon: item.abilities[3].displayIcon,
-                                abilityDescription: item.abilities[3].description,
-                                abilitySlot: "X"
-                              },
-
-                     ]
-                    }
-                })
-                setIsCharSelected(true)
-
-            }
+            if(!isLocked){
+                if(item.uuid === id && item){     
+                    setIndexAgent(agents.indexOf(item))
+    
+                    dispatch({
+                        type: 'SET_AGENT_INFOS',
+                        payload: {
+                            name: item.displayName,
+                            role: item.role.displayName,
+                            roleIcon: item.role.displayIcon,
+                            description: item.description,
+                            img: item.fullPortrait,
+                            abilities: [
+    
+                                 {
+                                    abilityName: item.role.displayName,
+                                    abilityIcon: item.role.displayIcon,
+                                    abilityDescription: item.role.description,
+                                    abilitySlot: "Info"
+                                  },
+                                  {
+                                    abilityName: item.abilities[0].displayName,
+                                    abilityIcon: item.abilities[0].displayIcon,
+                                    abilityDescription: item.abilities[0].description,
+                                    abilitySlot: "C"
+                                  },
+                                  {
+                                    abilityName: item.abilities[1].displayName,
+                                    abilityIcon: item.abilities[1].displayIcon,
+                                    abilityDescription: item.abilities[1].description,
+                                    abilitySlot: "Q"
+                                  },
+                                  {
+                                    abilityName: item.abilities[2].displayName,
+                                    abilityIcon: item.abilities[2].displayIcon,
+                                    abilityDescription: item.abilities[2].description,
+                                    abilitySlot: "E"
+                                  },
+                                  {
+                                    abilityName: item.abilities[3].displayName,
+                                    abilityIcon: item.abilities[3].displayIcon,
+                                    abilityDescription: item.abilities[3].description,
+                                    abilitySlot: "X"
+                                  },
+    
+                         ]
+                        }
+                    })
+                    setIsCharSelected(true)
+                }
+            } 
         })
     }
 
@@ -98,23 +99,13 @@ export const AgentSelect = () => {
         setAbilityClicked(index);
     }
 
-    function handleLockAgent(item: any){
-        setIsLocked(true)
-        setCompSelected([
-            ...compSelected, 
-            {
-                name: item.displayName,
-                roleIcon: item.displayIcon,
-                agentIcon: item.displayIcon
-            }])
-            console.log(compSelected)
+    function handleLockAgent(){
+       setIsLocked(true)
     }
 
     return(
         <Container>
-
             <CompTeam> 
-
                 <CompAgentSelected> 
                     <div className="box-agent-img">
                      {isCharSelected ? 
@@ -135,30 +126,21 @@ export const AgentSelect = () => {
                     <h2 className='agent-name'>{state.name}</h2>
                 </CompAgentSelected>
 
-                
-
-
-
-
-
-
-
             </CompTeam>
 
             <MidAgentSection> 
 
                 <AgentProfile isVisible={isCharSelected} src={state.img}/>
 
-                <LockInButton isVisible={isCharSelected} disabled={isLocked} onClick={()=>handleLockAgent(state)}>
+                <LockInButton isVisible={isCharSelected} disabled={isLocked} onClick={()=>handleLockAgent()}>
                     {isLocked ? 'LOCKED' : 'LOCK IN'}
                 </LockInButton>
-   
 
 
-                <AgentSelectArea>
+                <AgentSelectArea >
                     {agents.filter((playable: { isPlayableCharacter: any }) => playable.isPlayableCharacter)
                     .map((agent: any) => (
-                        <AgentIcon onClick={()=>handleSelectedAgent(agent.uuid)} key={agent.uuid} src={agent.displayIcon} alt={agent.displayName}/> 
+                        <AgentIcon locked={isLocked} onClick={()=>handleSelectedAgent(agent.uuid)} key={agent.uuid} src={agent.displayIcon} alt={agent.displayName}/> 
                     ))}
                 </AgentSelectArea>
                 

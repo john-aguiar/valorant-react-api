@@ -4,7 +4,8 @@ import bindBg from "../../images/bind-valorant.jpeg"
 
 
 type Props ={
-    isVisible: boolean;
+    isVisible?: boolean;
+    locked?: boolean;
 }
 
 export const Container = styled.div`
@@ -60,11 +61,11 @@ export const AgentSelectArea = styled.div`
 
 `
 
-export const AgentIcon = styled.img`
-    background-color: rgba(100, 100, 100, 0.1);
-    width: 50px;
+export const AgentIcon = styled.img<Props>`
+    background: ${props => props.locked ? 'red' : 'rgba(100, 100, 100, 0.1)' };
     height: 50px;
     border: 2px solid #ccc;
+
 `
 
 export const CompTeam = styled.div`
