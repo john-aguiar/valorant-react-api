@@ -71,36 +71,58 @@ export const CompTeam = styled.div`
     position: absolute;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
     left: 0;
-    width: 200px;
-    height: 400px;
 `
 
 export const CompAgentSelected = styled.div`
     display: flex;
-    position: relative;
-    background-color: red;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    margin-left: 10px;
     width: 180px;
     .box-agent-img{
-        width: 25%;
         height: 100%;
-        margin-bottom: 10px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-right: 10px;
     }
 
     #agent-icon-comp {
-        width: 50px;
-        height: 50px;
-    }
+        position: relative;
+        background-color:  rgba(100, 100, 100, 0.6);
+        border: 2px solid rgba(255, 255, 255, 0.3);
+       
+        img {
+            width: 60px;
+            height: 60px;
+        }
 
-    #role-icon-comp-absolute {
+        #role-icon-comp-absolute {
         width: 20px;
         height: 20px;
         position: absolute;
         bottom: 0;
         left: 0;
+         }
+
     }
+
+    #agent-icon-comp-unknown{
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 60px;
+        height: 60px;
+        background-color: rgba(100, 100, 100, 0.6);
+        font-size: large;
+        color: white;
+    }
+
+
+
 `
 
 
@@ -110,7 +132,7 @@ export const SelectedAgentInfos = styled.div`
     right: 0;
     width: 22%;
 
-    height: 100%;
+    height: 80%;
     color: #fff;
     background: rgba( 255, 255, 255, 0.1 );
     box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );

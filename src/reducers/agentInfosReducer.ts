@@ -24,7 +24,7 @@ type reducerActionType = {
 }
 
 export const agentInitialState: reducerState = {
-    name: "Reyna",
+    name: "",
     role: "Duelist",
     roleIcon: "ksajak",
     description: "Turkish bounty hunter Fade unleashes the power of raw nightmare to seize enemy secrets. Attuned with terror itself, she hunts down targets and reveals their deepest fears - before crushing them in the dark.",

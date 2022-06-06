@@ -1,9 +1,17 @@
 import { Container, AgentProfile, AgentSelectArea,MidAgentSection,LockInButton, AgentIcon, CompTeam, SelectedAgentInfos,
         Skills, SkillDescription, SkillsBox, CompAgentSelected}  from './AgentSelect';
+
 import { useState, useEffect, useReducer } from 'react';
 import { API_KEY } from '../AgentCard';
 
 import { agentInfosReducer, agentInitialState } from '../../reducers/agentInfosReducer';
+
+
+type compSelectedType = {
+    name: string,
+    roleIcon: string,
+    agentIcon: string
+}
 
 export const AgentSelect = () => {
 
@@ -14,6 +22,8 @@ export const AgentSelect = () => {
     const [isLocked, setIsLocked] = useState<boolean>(false);    
     const [isCharSelected, setIsCharSelected] = useState(false)
     const [abilityClicked, setAbilityClicked] = useState(0)
+    const [compSelected, setCompSelected] = useState<compSelectedType[]>([])
+    const [indexAgent, setIndexAgent] = useState(0)
 
     async function getAgents(){
         const response = await fetch(API_KEY);
@@ -31,7 +41,8 @@ export const AgentSelect = () => {
     function handleSelectedAgent(id: string){
         agents.filter((playable: { isPlayableCharacter: any }) => playable.isPlayableCharacter)
         .filter((item: any)=> {
-            if(item.uuid === id && item){      
+            if(item.uuid === id && item){     
+                setIndexAgent(agents.indexOf(item))
 
                 dispatch({
                     type: 'SET_AGENT_INFOS',
@@ -86,10 +97,17 @@ export const AgentSelect = () => {
     function saveIndexSkill(index: any){
         setAbilityClicked(index);
     }
-    console.log(abilityClicked)
 
-    function showAbilitiesInfos(){
-        
+    function handleLockAgent(item: any){
+        setIsLocked(true)
+        setCompSelected([
+            ...compSelected, 
+            {
+                name: item.displayName,
+                roleIcon: item.displayIcon,
+                agentIcon: item.displayIcon
+            }])
+            console.log(compSelected)
     }
 
     return(
@@ -99,16 +117,31 @@ export const AgentSelect = () => {
 
                 <CompAgentSelected> 
                     <div className="box-agent-img">
-                     {isCharSelected && 
+                     {isCharSelected ? 
                      <> 
-                        <img id='agent-icon-comp' src={agents[5].displayIcon} alt="" />
+                        <div id='agent-icon-comp' > 
+                            <img src={agents[indexAgent].displayIcon} alt="" />
+                            <img id="role-icon-comp-absolute" src={state.roleIcon} alt="" /> 
+                        </div>
+
+                     </>
+                        :
+                        <> 
+                        <div id="agent-icon-comp-unknown">?</div>
                         <img id="role-icon-comp-absolute" src={state.roleIcon} alt="" />
                      </>
-                    
                      }   
                     </div>
                     <h2 className='agent-name'>{state.name}</h2>
                 </CompAgentSelected>
+
+                
+
+
+
+
+
+
 
             </CompTeam>
 
@@ -116,7 +149,7 @@ export const AgentSelect = () => {
 
                 <AgentProfile isVisible={isCharSelected} src={state.img}/>
 
-                <LockInButton isVisible={isCharSelected} disabled={isLocked} onClick={()=> {setIsLocked(true)}}>
+                <LockInButton isVisible={isCharSelected} disabled={isLocked} onClick={()=>handleLockAgent(state)}>
                     {isLocked ? 'LOCKED' : 'LOCK IN'}
                 </LockInButton>
    
